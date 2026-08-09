@@ -95,61 +95,55 @@
 <script>
 
 function analyze() {
+    const income = Number(document.getElementById("income").value);
+    const expenses = Number(document.getElementById("expenses").value);
 
-    let income = Number(document.getElementById("income").value);
-    let expenses = Number(document.getElementById("expenses").value);
+    const savings = income - expenses;
 
-    let savings = income - expenses;
-
-    document.getElementById("savings").innerText = savings;
+    document.getElementById("savings").textContent = savings;
 }
-
 
 function runScenario() {
 
-    let income = Number(document.getElementById("income").value);
-    let expenses = Number(document.getElementById("expenses").value);
+    const income = Number(document.getElementById("income").value);
+    const expenses = Number(document.getElementById("expenses").value);
 
-    let scenario = document.getElementById("scenario").value;
-    let amount = Number(document.getElementById("scenarioAmount").value);
+    const scenario = document.getElementById("scenario").value;
+    const amount = Number(document.getElementById("scenarioAmount").value);
 
-    let currentSavings = income - expenses;
+    if (!income || !expenses || !amount) {
+        alert("Please enter your income, expenses and scenario amount.");
+        return;
+    }
+
+    const currentSavings = income - expenses;
+
     let newSavings = currentSavings;
     let impact = 0;
 
     if (scenario === "extra") {
-
         newSavings = currentSavings - amount;
         impact = -amount * 12;
-
     }
 
-    else if (scenario === "income") {
-
+    if (scenario === "income") {
         newSavings = currentSavings + amount;
         impact = amount * 12;
-
     }
 
-    else if (scenario === "purchase") {
-
+    if (scenario === "purchase") {
         newSavings = currentSavings;
         impact = -amount;
-
     }
 
-    else if (scenario === "emergency") {
-
+    if (scenario === "emergency") {
         newSavings = currentSavings;
         impact = -amount;
-
     }
 
-    document.getElementById("currentResult").innerText = currentSavings;
-
-    document.getElementById("newSavings").innerText = newSavings;
-
-    document.getElementById("impact").innerText = impact;
+    document.getElementById("currentResult").textContent = currentSavings;
+    document.getElementById("newSavings").textContent = newSavings;
+    document.getElementById("impact").textContent = impact;
 
     let projection = "";
 
