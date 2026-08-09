@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>What-If Wallet</title>
+</head>
+
+<body>
+
+    <h1>💰 What-If Wallet</h1>
+    <p>See how your financial decisions could affect your future.</p>
+
+    <h2>Enter Your Finances</h2>
+
+    <label>Monthly Income:</label>
+    <input type="number" id="income" placeholder="Enter income">
+    <br><br>
+
+    <label>Monthly Expenses:</label>
+    <input type="number" id="expenses" placeholder="Enter expenses">
+    <br><br>
+
+    <label>Savings Goal:</label>
+    <input type="number" id="goal" placeholder="Enter goal">
+    <br><br>
+
+    <button onclick="analyze()">Analyze</button>
+
+    <h2>Result</h2>
+
+    <p>Monthly Savings: ₹<span id="savings">0</span></p>
+
+    <h2>What If?</h2>
+
+    <label>Extra Monthly Expense:</label>
+    <input type="number" id="extra" placeholder="Enter amount">
+    <br><br>
+
+    <button onclick="simulate()">Simulate</button>
+
+    <h3>Scenario Result</h3>
+
+    <p>New Monthly Savings: ₹<span id="newSavings">0</span></p>
+
+    <p>12-Month Impact: ₹<span id="impact">0</span></p>
+
+    <script>
+        function analyze() {
+            let income = Number(document.getElementById("income").value);
+            let expenses = Number(document.getElementById("expenses").value);
+
+            let savings = income - expenses;
+
+            document.getElementById("savings").innerText = savings;
+        }
+
+        function simulate() {
+            let income = Number(document.getElementById("income").value);
+            let expenses = Number(document.getElementById("expenses").value);
+            let extra = Number(document.getElementById("extra").value);
+
+            let currentSavings = income - expenses;
+            let newSavings = income - (expenses + extra);
+
+            let impact = (newSavings - currentSavings) * 12;
+
+            document.getElementById("newSavings").innerText = newSavings;
+            document.getElementById("impact").innerText = impact;
+        }
+    </script>
+
+</body>
+</html><!DOCTYPE html>
+<html>
+<head>
+    <title>What-If Wallet</title>
+</head>
+
+<body>
+
+    <h1>💰 What-If Wallet</h1>
+    <p>See how your financial decisions could affect your future.</p>
+
+    <h2>Enter Your Finances</h2>
+
+    <label>Monthly Income:</label>
+    <input type="number" id="income" placeholder="Enter income">
+    <br><br>
+
+    <label>Monthly Expenses:</label>
+    <input type="number" id="expenses" placeholder="Enter expenses">
+    <br><br>
+
+    <label>Savings Goal:</label>
+    <input type="number" id="goal" placeholder="Enter goal">
+    <br><br>
+
+    <button onclick="analyze()">Analyze</button>
+
+    <h2>Result</h2>
+
+    <p>Monthly Savings: ₹<span id="savings">0</span></p>
+
+    <h2>What If?</h2>
+
+    <label>Extra Monthly Expense:</label>
+    <input type="number" id="extra" placeholder="Enter amount">
+    <br><br>
+
+    <button onclick="simulate()">Simulate</button>
+
+    <h3>Scenario Result</h3>
+
+    <p>New Monthly Savings: ₹<span id="newSavings">0</span></p>
+
+    <p>12-Month Impact: ₹<span id="impact">0</span></p>
+
+    <script>
+        function analyze() {
+            let income = Number(document.getElementById("income").value);
+            let expenses = Number(document.getElementById("expenses").value);
+
+            let savings = income - expenses;
+
+            document.getElementById("savings").innerText = savings;
+        }
+
+        function simulate() {
+            let income = Number(document.getElementById("income").value);
+            let expenses = Number(document.getElementById("expenses").value);
+            let extra = Number(document.getElementById("extra").value);
+
+            let currentSavings = income - expenses;
+            let newSavings = income - (expenses + extra);
+
+            let impact = (newSavings - currentSavings) * 12;
+
+            document.getElementById("newSavings").innerText = newSavings;
+            document.getElementById("impact").innerText = impact;
+        }
+    </script>
+
+</body>
+</html>
