@@ -1,48 +1,72 @@
+* {
+    box-sizing: border-box;
+}
+
 body {
-    font-family: Arial, sans-serif;
-    background: #f4f7fb;
     margin: 0;
-    padding: 30px;
-    text-align: center;
+    font-family: Arial, sans-serif;
+    background: #eef4ff;
+    color: #1f2937;
 }
 
 .container {
-    max-width: 600px;
-    margin: auto;
+    width: 90%;
+    max-width: 700px;
+    margin: 40px auto;
 }
 
-h1 {
-    color: #222;
+header {
+    text-align: center;
+    margin-bottom: 25px;
 }
 
-.subtitle {
-    color: #666;
+header h1 {
+    font-size: 38px;
+    margin-bottom: 10px;
+}
+
+header p {
+    color: #64748b;
+    font-size: 17px;
 }
 
 .card {
     background: white;
     padding: 25px;
     margin: 20px 0;
-    border-radius: 15px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    border-radius: 18px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+}
+
+.card h2 {
+    margin-top: 0;
+}
+
+label {
+    display: block;
+    font-weight: bold;
+    margin-top: 15px;
+    margin-bottom: 7px;
 }
 
 input {
-    width: 90%;
-    padding: 12px;
-    margin: 8px 0 15px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
+    width: 100%;
+    padding: 13px;
+    border: 1px solid #cbd5e1;
+    border-radius: 10px;
     font-size: 16px;
 }
 
 button {
-    padding: 12px 25px;
+    width: 100%;
+    margin-top: 20px;
+    padding: 14px;
     border: none;
-    border-radius: 8px;
+    border-radius: 10px;
     background: #2563eb;
     color: white;
-    font-size: 16px;
+    font-size: 17px;
+    font-weight: bold;
     cursor: pointer;
 }
 
@@ -50,15 +74,21 @@ button:hover {
     background: #1d4ed8;
 }
 
-.result {
-    font-size: 20px;
+.result-card {
+    text-align: center;
+}
+
+.big-number {
+    font-size: 40px;
     font-weight: bold;
+    color: #16a34a;
+    margin-top: 15px;
 }
 
-.positive {
-    color: green;
+.card p {
+    line-height: 1.6;
 }
 
-.warning {
-    color: red;
+strong {
+    font-size: 18px;
 }
