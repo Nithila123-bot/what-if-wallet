@@ -92,3 +92,16 @@ button:hover {
 strong {
     font-size: 18px;
 }
+.projection-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 15px;
+    margin: 8px 0;
+    background: #f1f5f9;
+    border-radius: 10px;
+}
+
+.projection-row strong {
+    color: #2563eb;
+}
