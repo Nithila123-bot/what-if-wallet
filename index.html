@@ -92,12 +92,10 @@
     <div id="projection"></div>
 </div>
 
-
-
-
 <script>
 
 function analyze() {
+
     let income = Number(document.getElementById("income").value);
     let expenses = Number(document.getElementById("expenses").value);
 
@@ -106,18 +104,51 @@ function analyze() {
     document.getElementById("savings").innerText = savings;
 }
 
-function simulate() {
+
+function runScenario() {
 
     let income = Number(document.getElementById("income").value);
     let expenses = Number(document.getElementById("expenses").value);
-    let extra = Number(document.getElementById("extra").value);
+
+    let scenario = document.getElementById("scenario").value;
+    let amount = Number(document.getElementById("scenarioAmount").value);
 
     let currentSavings = income - expenses;
-    let newSavings = income - expenses - extra;
-    let impact = (newSavings - currentSavings) * 12;
+    let newSavings = currentSavings;
+    let impact = 0;
+
+    if (scenario === "extra") {
+
+        newSavings = currentSavings - amount;
+        impact = -amount * 12;
+
+    }
+
+    else if (scenario === "income") {
+
+        newSavings = currentSavings + amount;
+        impact = amount * 12;
+
+    }
+
+    else if (scenario === "purchase") {
+
+        newSavings = currentSavings;
+        impact = -amount;
+
+    }
+
+    else if (scenario === "emergency") {
+
+        newSavings = currentSavings;
+        impact = -amount;
+
+    }
 
     document.getElementById("currentResult").innerText = currentSavings;
+
     document.getElementById("newSavings").innerText = newSavings;
+
     document.getElementById("impact").innerText = impact;
 
     let projection = "";
