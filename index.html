@@ -82,13 +82,12 @@
     <div id="projection"></div>
 </div>
 
-</div>
+
 
 
 <script>
 
 function analyze() {
-
     let income = Number(document.getElementById("income").value);
     let expenses = Number(document.getElementById("expenses").value);
 
@@ -97,7 +96,6 @@ function analyze() {
     document.getElementById("savings").innerText = savings;
 }
 
-
 function simulate() {
 
     let income = Number(document.getElementById("income").value);
@@ -105,30 +103,28 @@ function simulate() {
     let extra = Number(document.getElementById("extra").value);
 
     let currentSavings = income - expenses;
-
-    let newSavings = income - (expenses + extra);
-
+    let newSavings = income - expenses - extra;
     let impact = (newSavings - currentSavings) * 12;
 
     document.getElementById("currentResult").innerText = currentSavings;
-
     document.getElementById("newSavings").innerText = newSavings;
-
     document.getElementById("impact").innerText = impact;
+
     let projection = "";
 
-for (let month = 1; month <= 12; month++) {
-    let total = newSavings * month;
+    for (let month = 1; month <= 12; month++) {
 
-    projection += `
-        <p>
-            Month ${month}:
-            <strong>₹${total}</strong>
-        </p>
-    `;
-}
+        let total = newSavings * month;
 
-document.getElementById("projection").innerHTML = projection;
+        projection += `
+            <div class="projection-row">
+                <span>Month ${month}</span>
+                <strong>₹${total}</strong>
+            </div>
+        `;
+    }
+
+    document.getElementById("projection").innerHTML = projection;
 }
 
 </script>
