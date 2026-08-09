@@ -58,23 +58,29 @@
 
 
     <div class="card">
-        <h2>🎯 Scenario Result</h2>
+    <h2>🎯 Scenario Result</h2>
 
-        <p>
-            Current Monthly Savings:
-            <strong>₹<span id="currentResult">0</span></strong>
-        </p>
+    <p>
+        Current Monthly Savings:
+        <strong>₹<span id="currentResult">0</span></strong>
+    </p>
 
-        <p>
-            New Monthly Savings:
-            <strong>₹<span id="newSavings">0</span></strong>
-        </p>
+    <p>
+        New Monthly Savings:
+        <strong>₹<span id="newSavings">0</span></strong>
+    </p>
 
-        <p>
-            12-Month Impact:
-            <strong>₹<span id="impact">0</span></strong>
-        </p>
-    </div>
+    <p>
+        12-Month Impact:
+        <strong>₹<span id="impact">0</span></strong>
+    </p>
+</div>
+
+<div class="card">
+    <h2>📈 12-Month Projection</h2>
+
+    <div id="projection"></div>
+</div>
 
 </div>
 
@@ -109,6 +115,20 @@ function simulate() {
     document.getElementById("newSavings").innerText = newSavings;
 
     document.getElementById("impact").innerText = impact;
+    let projection = "";
+
+for (let month = 1; month <= 12; month++) {
+    let total = newSavings * month;
+
+    projection += `
+        <p>
+            Month ${month}:
+            <strong>₹${total}</strong>
+        </p>
+    `;
+}
+
+document.getElementById("projection").innerHTML = projection;
 }
 
 </script>
