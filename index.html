@@ -162,6 +162,34 @@ function runScenario() {
     }
 
     document.getElementById("projection").innerHTML = projection;
+    const months = [];
+const savingsData = [];
+
+for (let month = 1; month <= 12; month++) {
+    months.push("Month " + month);
+    savingsData.push(newSavings * month);
+}
+
+if (window.savingsChart) {
+    window.savingsChart.destroy();
+}
+
+const ctx = document.getElementById("savingsChart");
+
+window.savingsChart = new Chart(ctx, {
+    type: "line",
+    data: {
+        labels: months,
+        datasets: [{
+            label: "Projected Savings",
+            data: savingsData,
+            borderWidth: 3
+        }]
+    },
+    options: {
+        responsive: true
+    }
+});
 }
 
 </script>
