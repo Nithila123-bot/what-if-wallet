@@ -4,104 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>What-If Wallet</title>
-
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: #f4f7fb;
-            margin: 0;
-            padding: 20px;
-        }
-
-        .container {
-            max-width: 800px;
-            margin: auto;
-        }
-
-        header {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-
-        .card {
-            background: white;
-            padding: 20px;
-            margin: 20px 0;
-            border-radius: 15px;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
-        }
-
-        h1 {
-            color: #1d4ed8;
-        }
-
-        h2 {
-            color: #333;
-        }
-
-        label {
-            display: block;
-            margin-top: 15px;
-            margin-bottom: 5px;
-        }
-
-        input, select {
-            width: 100%;
-            padding: 12px;
-            box-sizing: border-box;
-            border: 1px solid #ccc;
-            border-radius: 8px;
-        }
-
-        button {
-            margin-top: 20px;
-            padding: 12px 20px;
-            border: none;
-            border-radius: 8px;
-            background: #2563eb;
-            color: white;
-            cursor: pointer;
-            font-size: 16px;
-        }
-
-        button:hover {
-            background: #1d4ed8;
-        }
-
-        .big-number {
-            font-size: 35px;
-            font-weight: bold;
-            color: #16a34a;
-            text-align: center;
-        }
-
-        .result {
-            font-size: 18px;
-            line-height: 2;
-        }
-
-        #projection {
-            margin-top: 20px;
-        }
-
-        .projection-row {
-            display: flex;
-            justify-content: space-between;
-            padding: 12px;
-            margin: 5px 0;
-            background: #f1f5f9;
-            border-radius: 8px;
-        }
-
-        canvas {
-            width: 100%;
-            max-width: 700px;
-            height: 350px;
-            display: block;
-            margin: auto;
-            background: white;
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
@@ -113,9 +16,7 @@
         <p>See how today's money decisions could affect your future.</p>
     </header>
 
-    <!-- FINANCES -->
     <div class="card">
-
         <h2>💳 Your Finances</h2>
 
         <label>Monthly Income</label>
@@ -128,455 +29,137 @@
         <input type="number" id="goal" placeholder="Example: 100000">
 
         <button onclick="analyze()">Analyze My Money</button>
-
     </div>
 
 
-    <!-- CURRENT RESULT -->
-    <div class="card">
-
+    <div class="card result-card">
         <h2>📊 Your Current Situation</h2>
 
         <div class="big-number">
             ₹<span id="savings">0</span>
         </div>
 
-        <p style="text-align:center;">Monthly Savings</p>
-
+        <p>Monthly Savings</p>
     </div>
 
+<div class="card">
+    <h2>🔮 What If...?</h2>
 
-    <!-- WHAT IF -->
-    <div class="card">
+    <p>Choose a situation to see how it affects your savings.</p>
 
-        <h2>🔮 What If...?</h2>
+    <label>Scenario</label>
 
-        <p>Choose a situation to see how it affects your savings.</p>
+    <select id="scenario">
+        <option value="extra">💸 Extra Monthly Expense</option>
+        <option value="income">💰 Income Increase</option>
+        <option value="purchase">🛍️ Big Purchase</option>
+        <option value="emergency">🚨 Emergency Expense</option>
+    </select>
 
-        <label>Scenario</label>
+    <label>Amount</label>
 
-        <select id="scenario">
+    <input
+        type="number"
+        id="scenarioAmount"
+        placeholder="Example: 2000"
+    >
 
-            <option value="extra">
-                💸 Extra Monthly Expense
-            </option>
-
-            <option value="income">
-                💰 Income Increase
-            </option>
-
-            <option value="purchase">
-                🛍️ Big Purchase
-            </option>
-
-            <option value="emergency">
-                🚨 Emergency Expense
-            </option>
-
-        </select>
-
-        <label>Amount</label>
-
-        <input
-            type="number"
-            id="scenarioAmount"
-            placeholder="Example: 2000"
-        >
-
-        <button onclick="runScenario()">
-            Simulate Scenario
-        </button>
-
-    </div>
-
-
-    <!-- SCENARIO RESULT -->
-    <div class="card">
-
-        <h2>🎯 Scenario Result</h2>
-
-        <div class="result">
-
-            <p>
-                Current Monthly Savings:
-                ₹<strong id="currentResult">0</strong>
-            </p>
-
-            <p>
-                New Monthly Savings:
-                ₹<strong id="newSavings">0</strong>
-            </p>
-
-            <p>
-                12-Month Impact:
-                ₹<strong id="impact">0</strong>
-            </p>
-
-        </div>
-
-    </div>
-
-
-    <!-- GRAPH -->
-    <div class="card">
-
-        <h2>📈 12-Month Savings Graph</h2>
-
-        <canvas id="savingsChart" width="700" height="350"></canvas>
-
-    </div>
-
-
-    <!-- PROJECTION -->
-    <div class="card">
-
-        <h2>📅 12-Month Projection</h2>
-
-        <div id="projection"></div>
-
-    </div>
-
+    <button onclick="runScenario()">Simulate Scenario</button>
 </div>
 
+    <div class="card">
+    <h2>🎯 Scenario Result</h2>
+
+    <p>
+        Current Monthly Savings:
+        <strong>₹<span id="currentResult">0</span></strong>
+    </p>
+
+    <p>
+        New Monthly Savings:
+        <strong>₹<span id="newSavings">0</span></strong>
+    </p>
+
+    <p>
+        12-Month Impact:
+        <strong>₹<span id="impact">0</span></strong>
+    </p>
+</div>
+
+<div class="card">
+    <h2>📈 12-Month Projection</h2>
+
+    <div id="projection"></div>
+</div>
 
 <script>
 
-let currentSavings = 0;
-let newSavings = 0;
-
-
-/* ANALYZE BUTTON */
-
 function analyze() {
+    const income = Number(document.getElementById("income").value);
+    const expenses = Number(document.getElementById("expenses").value);
 
-    const income =
-        Number(document.getElementById("income").value);
+    const savings = income - expenses;
 
-    const expenses =
-        Number(document.getElementById("expenses").value);
-
-    if (income <= 0 || expenses < 0) {
-
-        alert("Please enter valid income and expenses.");
-
-        return;
-    }
-
-    currentSavings = income - expenses;
-
-    newSavings = currentSavings;
-
-    document.getElementById("savings").textContent =
-        currentSavings;
-
-    document.getElementById("currentResult").textContent =
-        currentSavings;
-
-    document.getElementById("newSavings").textContent =
-        currentSavings;
-
-    drawGraph(currentSavings);
-
-    createProjection(currentSavings);
+    document.getElementById("savings").textContent = savings;
 }
-
-
-/* SCENARIO BUTTON */
 
 function runScenario() {
 
-    const income =
-        Number(document.getElementById("income").value);
+    const income = Number(document.getElementById("income").value);
+    const expenses = Number(document.getElementById("expenses").value);
 
-    const expenses =
-        Number(document.getElementById("expenses").value);
+    const scenario = document.getElementById("scenario").value;
+    const amount = Number(document.getElementById("scenarioAmount").value);
 
-    const scenario =
-        document.getElementById("scenario").value;
-
-    const amount =
-        Number(document.getElementById("scenarioAmount").value);
-
-
-    if (income <= 0 || expenses < 0 || amount <= 0) {
-
-        alert("Please enter income, expenses and scenario amount.");
-
+    if (!income || !expenses || !amount) {
+        alert("Please enter your income, expenses and scenario amount.");
         return;
     }
 
+    const currentSavings = income - expenses;
 
-    currentSavings = income - expenses;
-
-    newSavings = currentSavings;
-
+    let newSavings = currentSavings;
     let impact = 0;
 
-
-    /* EXTRA MONTHLY EXPENSE */
-
     if (scenario === "extra") {
-
         newSavings = currentSavings - amount;
-
         impact = -amount * 12;
-
     }
 
-
-    /* INCOME INCREASE */
-
-    else if (scenario === "income") {
-
+    if (scenario === "income") {
         newSavings = currentSavings + amount;
-
         impact = amount * 12;
-
     }
 
-
-    /* BIG PURCHASE */
-
-    else if (scenario === "purchase") {
-
+    if (scenario === "purchase") {
         newSavings = currentSavings;
-
         impact = -amount;
-
     }
 
-
-    /* EMERGENCY */
-
-    else if (scenario === "emergency") {
-
+    if (scenario === "emergency") {
         newSavings = currentSavings;
-
         impact = -amount;
-
     }
 
-
-    document.getElementById("currentResult").textContent =
-        currentSavings;
-
-    document.getElementById("newSavings").textContent =
-        newSavings;
-
-    document.getElementById("impact").textContent =
-        impact;
-
-
-    createProjection(newSavings);
-
-    drawGraph(newSavings);
-}
-
-
-/* PROJECTION */
-
-function createProjection(saving) {
+    document.getElementById("currentResult").textContent = currentSavings;
+    document.getElementById("newSavings").textContent = newSavings;
+    document.getElementById("impact").textContent = impact;
 
     let projection = "";
 
     for (let month = 1; month <= 12; month++) {
 
-        let total = saving * month;
+        let total = newSavings * month;
 
         projection += `
             <div class="projection-row">
-
                 <span>Month ${month}</span>
-
                 <strong>₹${total}</strong>
-
             </div>
         `;
     }
 
-    document.getElementById("projection").innerHTML =
-        projection;
-}
-
-
-/* GRAPH */
-
-function drawGraph(saving) {
-
-    const canvas =
-        document.getElementById("savingsChart");
-
-    const ctx = canvas.getContext("2d");
-
-
-    /* CLEAR GRAPH */
-
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-
-    const width = canvas.width;
-    const height = canvas.height;
-
-
-    /* DATA */
-
-    let data = [];
-
-    for (let month = 1; month <= 12; month++) {
-
-        data.push(saving * month);
-
-    }
-
-
-    /* FIND MAX VALUE */
-
-    let maxValue = Math.max(...data);
-
-    if (maxValue <= 0) {
-        maxValue = 100;
-    }
-
-
-    /* GRAPH AREA */
-
-    const left = 60;
-    const right = 20;
-    const top = 30;
-    const bottom = 50;
-
-
-    const graphWidth =
-        width - left - right;
-
-    const graphHeight =
-        height - top - bottom;
-
-
-    /* AXES */
-
-    ctx.beginPath();
-
-    ctx.moveTo(left, top);
-
-    ctx.lineTo(left, height - bottom);
-
-    ctx.lineTo(width - right, height - bottom);
-
-    ctx.stroke();
-
-
-    /* Y AXIS LABELS */
-
-    ctx.font = "12px Arial";
-
-    ctx.fillStyle = "#333";
-
-    for (let i = 0; i <= 5; i++) {
-
-        let value = (maxValue / 5) * i;
-
-        let y =
-            height -
-            bottom -
-            (graphHeight * i / 5);
-
-        ctx.fillText(
-            "₹" + Math.round(value),
-            5,
-            y + 4
-        );
-
-    }
-
-
-    /* GRAPH LINE */
-
-    ctx.beginPath();
-
-
-    data.forEach((value, index) => {
-
-        let x =
-            left +
-            (graphWidth * index / 11);
-
-        let y =
-            height -
-            bottom -
-            (value / maxValue * graphHeight);
-
-
-        if (index === 0) {
-
-            ctx.moveTo(x, y);
-
-        } else {
-
-            ctx.lineTo(x, y);
-
-        }
-
-    });
-
-
-    ctx.strokeStyle = "#2563eb";
-
-    ctx.lineWidth = 3;
-
-    ctx.stroke();
-
-
-    /* POINTS */
-
-    data.forEach((value, index) => {
-
-        let x =
-            left +
-            (graphWidth * index / 11);
-
-        let y =
-            height -
-            bottom -
-            (value / maxValue * graphHeight);
-
-
-        ctx.beginPath();
-
-        ctx.arc(x, y, 5, 0, Math.PI * 2);
-
-        ctx.fillStyle = "#2563eb";
-
-        ctx.fill();
-
-
-        /* MONTH NUMBER */
-
-        ctx.fillStyle = "#333";
-
-        ctx.font = "12px Arial";
-
-        ctx.fillText(
-            index + 1,
-            x - 4,
-            height - 25
-        );
-
-    });
-
-
-    /* TITLE */
-
-    ctx.font = "bold 14px Arial";
-
-    ctx.fillStyle = "#333";
-
-    ctx.fillText(
-        "Month",
-        width / 2 - 20,
-        height - 5
-    );
-
+    document.getElementById("projection").innerHTML = projection;
 }
 
 </script>
